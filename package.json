@@ -1,0 +1,25 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "RSS-reader project",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antonlipilin/frontend-project-lvl3.git"
+  },
+  "author": "Anton Lipilin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/antonlipilin/frontend-project-lvl3/issues"
+  },
+  "homepage": "https://github.com/antonlipilin/frontend-project-lvl3#readme",
+  "devDependencies": {
+    "eslint": "^7.29.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4"
+  }
+}
