@@ -7,6 +7,10 @@ const __dirname = path.dirname(__filename);
 
 export default {
   entry: path.resolve(__dirname, './src/index.js'),
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'main.js',
+  },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'RSS Reader',
