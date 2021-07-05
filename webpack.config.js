@@ -10,7 +10,7 @@ export default {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js',
-    publicPath: 'auto',
+    publicPath: '/',
   },
   plugins: [
     new HtmlWebpackPlugin({
