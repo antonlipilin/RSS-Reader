@@ -28,9 +28,8 @@ export default (html) => {
       const post = { postTitle, postLink, postDescription };
       htmlObject.posts.push(post);
     });
-    console.log(htmlObject);
-    console.log(chanel);
-  } else {
-    throw new Error('invalid rss');
+    return htmlObject;
   }
+
+  throw new Error('Invalid RSS');
 };
