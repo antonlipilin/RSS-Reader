@@ -18,4 +18,4 @@ export default (errors) => {
     feedbackContainer.classList.replace('text-success', 'text-danger');
     feedbackContainer.textContent = validationMessages[error];
   }
-}
+};
