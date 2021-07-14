@@ -21,11 +21,15 @@ export default (html) => {
       const itemTitle = item.querySelector('title');
       const itemLink = item.querySelector('link');
       const itemDescription = item.querySelector('description');
+      const guid = item.querySelector('guid');
 
       const postTitle = itemTitle.textContent;
       const postLink = itemLink.textContent;
       const postDescription = itemDescription.textContent.trim();
-      const post = { postTitle, postLink, postDescription };
+      const postId = guid.textContent;
+      const post = {
+        postTitle, postLink, postDescription, postId,
+      };
       htmlObject.posts.push(post);
     });
     return htmlObject;
