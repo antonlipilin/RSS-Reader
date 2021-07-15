@@ -4,29 +4,32 @@ import renderErrors from './renders/renderErrors.js';
 import renderFeeds from './renders/renderFeeds.js';
 import renderPosts from './renders/renderPosts.js';
 
+const elements = {
+  submitButton: document.querySelector('[aria-label="add"]'),
+  feedbackContainer: document.querySelector('.feedback'),
+  form: document.querySelector('.rss-form'),
+  urlInput: document.querySelector('#url-input'),
+};
+
 const processStateHandler = (instance, processState) => {
-  const submitButton = document.querySelector('[aria-label="add"]');
-  const feedbackContainer = document.querySelector('.feedback');
-  const form = document.querySelector('.rss-form');
-  const urlInput = document.querySelector('#url-input');
   switch (processState) {
     case 'filling':
-      urlInput.focus();
-      submitButton.disabled = false;
+      elements.urlInput.focus();
+      elements.submitButton.disabled = false;
       break;
     case 'sending':
-      submitButton.disabled = true;
-      feedbackContainer.textContent = '';
+      elements.submitButton.disabled = true;
+      elements.feedbackContainer.textContent = '';
       break;
     case 'success':
-      submitButton.disabled = false;
-      form.reset();
-      feedbackContainer.classList.replace('text-danger', 'text-success');
-      feedbackContainer.textContent = instance.t('form.success');
-      urlInput.focus();
+      elements.submitButton.disabled = false;
+      elements.form.reset();
+      elements.feedbackContainer.classList.replace('text-danger', 'text-success');
+      elements.feedbackContainer.textContent = instance.t('form.success');
+      elements.urlInput.focus();
       break;
     case 'failed':
-      submitButton.disabled = false;
+      elements.submitButton.disabled = false;
       break;
     default:
       throw new Error(`Unknown state: ${processState}`);
