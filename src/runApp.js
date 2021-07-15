@@ -1,8 +1,10 @@
 import axios from 'axios';
 import * as yup from 'yup';
 import _ from 'lodash';
+import i18next from 'i18next';
 import watcher from './view.js';
 import rssParser from './rssParser.js';
+import ru from './locales/ru.js';
 
 const validate = (url) => {
   const schema = yup.string().url();
@@ -11,7 +13,7 @@ const validate = (url) => {
     schema.validateSync(url);
     return [];
   } catch {
-    return ['invalid url'];
+    return ['form.invalidUrl'];
   }
 };
 
@@ -21,7 +23,7 @@ const updateValidationState = (watchedState, value) => {
 
   if (hasNoErrors) {
     if (watchedState.form.urls.has(value)) {
-      watchedState.form.validationErrors = ['not unique url'];
+      watchedState.form.validationErrors = ['form.notUniqueUrl'];
     } else {
       watchedState.form.validationErrors = [];
     }
@@ -55,7 +57,16 @@ export default () => {
     },
   };
 
-  const watchedState = watcher(state);
+  const instance = i18next.createInstance();
+  instance.init({
+    lng: 'ru',
+    debug: true,
+    resources: {
+      ru,
+    },
+  });
+
+  const watchedState = watcher(instance, state);
 
   const form = document.querySelector('.rss-form');
 
@@ -82,9 +93,9 @@ export default () => {
       })
       .catch((error) => {
         if (error.message === 'Invalid RSS') {
-          watchedState.form.loadingErrors = ['invalid rss'];
+          watchedState.form.loadingErrors = ['form.invalidRss'];
         } else {
-          watchedState.form.loadingErrors = ['network problem'];
+          watchedState.form.loadingErrors = ['form.networkProblem'];
         }
         watchedState.form.processState = 'failed';
       });
