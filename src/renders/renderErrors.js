@@ -1,16 +1,11 @@
 import _ from 'lodash';
 
-export default (errors) => {
-  const errorMessages = {
-    'invalid rss': 'Ресурс не содержит валидный RSS',
-    'network problem': 'Ошибка сети',
-  };
-
+export default (instance, errors) => {
   if (_.isEmpty(errors)) {
     return;
   }
   const feedbackContainer = document.querySelector('.feedback');
-  const errorMessage = errorMessages[_.first(errors)];
+  const error = _.first(errors);
   feedbackContainer.classList.replace('text-success', 'text-danger');
-  feedbackContainer.textContent = errorMessage;
+  feedbackContainer.textContent = instance.t(error);
 };

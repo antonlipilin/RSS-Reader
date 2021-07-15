@@ -4,7 +4,7 @@ import renderErrors from './renders/renderErrors.js';
 import renderFeeds from './renders/renderFeeds.js';
 import renderPosts from './renders/renderPosts.js';
 
-const processStateHandler = (processState) => {
+const processStateHandler = (instance, processState) => {
   const submitButton = document.querySelector('[aria-label="add"]');
   const feedbackContainer = document.querySelector('.feedback');
   const form = document.querySelector('.rss-form');
@@ -22,7 +22,7 @@ const processStateHandler = (processState) => {
       submitButton.disabled = false;
       form.reset();
       feedbackContainer.classList.replace('text-danger', 'text-success');
-      feedbackContainer.textContent = 'RSS успешно загружен';
+      feedbackContainer.textContent = instance.t('form.success');
       urlInput.focus();
       break;
     case 'failed':
@@ -33,20 +33,20 @@ const processStateHandler = (processState) => {
   }
 };
 
-export default (state) => {
+export default (instance, state) => {
   const watchedState = onChange(state, (path, value, previousValue) => {
     console.log('PATH IS  !!!!', path);
     console.log('VALUE IS  !!!', value);
     console.log('PREVIOUS VALUE IS', previousValue);
     switch (path) {
       case 'form.validationErrors':
-        renderValidationErrors(value);
+        renderValidationErrors(instance, value);
         break;
       case 'form.processState':
-        processStateHandler(value);
+        processStateHandler(instance, value);
         break;
       case 'form.loadingErrors':
-        renderErrors(value);
+        renderErrors(instance, value);
         break;
       case 'form.posts':
         renderPosts(value);
