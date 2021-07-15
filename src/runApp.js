@@ -46,7 +46,7 @@ export default () => {
   const state = {
     form: {
       processState: 'filling',
-      errors: [],
+      loadingErrors: [],
       validationErrors: [],
       urls: new Set(),
       feeds: [],
@@ -76,15 +76,15 @@ export default () => {
 
         watchedState.form.feeds.push(title);
         watchedState.form.posts = watchedState.form.posts.concat(posts);
-        watchedState.form.errors = [];
+        watchedState.form.loadingErrors = [];
         watchedState.form.urls.add(inputValue);
         watchedState.form.processState = 'success';
       })
       .catch((error) => {
         if (error.message === 'Invalid RSS') {
-          watchedState.form.errors = ['invalid rss'];
+          watchedState.form.loadingErrors = ['invalid rss'];
         } else {
-          watchedState.form.errors = ['network problem'];
+          watchedState.form.loadingErrors = ['network problem'];
         }
         watchedState.form.processState = 'failed';
       });

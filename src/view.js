@@ -9,7 +9,6 @@ const processStateHandler = (processState) => {
   const feedbackContainer = document.querySelector('.feedback');
   const form = document.querySelector('.rss-form');
   const urlInput = document.querySelector('#url-input');
-
   switch (processState) {
     case 'filling':
       urlInput.focus();
@@ -46,7 +45,7 @@ export default (state) => {
       case 'form.processState':
         processStateHandler(value);
         break;
-      case 'form.errors':
+      case 'form.loadingErrors':
         renderErrors(value);
         break;
       case 'form.posts':
