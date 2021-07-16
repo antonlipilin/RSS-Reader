@@ -86,7 +86,7 @@ export default () => {
         const { title, posts } = generateId(watchedState, rssParser(response.data.contents));
 
         watchedState.form.feeds.push(title);
-        watchedState.form.posts = watchedState.form.posts.concat(posts);
+        watchedState.form.posts = posts.concat(watchedState.form.posts);
         watchedState.form.loadingErrors = [];
         watchedState.form.urls.add(inputValue);
         watchedState.form.processState = 'success';
