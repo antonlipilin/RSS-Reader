@@ -81,7 +81,7 @@ export default () => {
     }
 
     watchedState.form.processState = 'sending';
-    axios.get(`https://api.allorigins.win/get?url=${encodeURIComponent(`${inputValue}`)}`)
+    axios.get(`https://hexlet-allorigins.herokuapp.com/get?disableCache=true&url=${encodeURIComponent(`${inputValue}`)}`)
       .then((response) => {
         const { title, posts } = generateId(watchedState, rssParser(response.data.contents));
 
