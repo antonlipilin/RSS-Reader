@@ -5,6 +5,7 @@ import i18next from 'i18next';
 import watcher from './view.js';
 import rssParser from './rssParser.js';
 import ru from './locales/ru.js';
+import updatePosts from './updatePosts.js';
 
 const validate = (url) => {
   const schema = yup.string().url();
@@ -91,6 +92,7 @@ export default () => {
         watchedState.form.urls.add(inputValue);
         watchedState.form.processState = 'success';
       })
+      .then(() => updatePosts(watchedState, inputValue))
       .catch((error) => {
         if (error.message === 'Invalid RSS') {
           watchedState.form.loadingErrors = ['form.invalidRss'];
