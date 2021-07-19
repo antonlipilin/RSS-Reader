@@ -4,14 +4,13 @@ import renderErrors from './renders/renderErrors.js';
 import renderFeeds from './renders/renderFeeds.js';
 import renderPosts from './renders/renderPosts.js';
 
-const elements = {
-  submitButton: document.querySelector('[aria-label="add"]'),
-  feedbackContainer: document.querySelector('.feedback'),
-  form: document.querySelector('.rss-form'),
-  urlInput: document.querySelector('#url-input'),
-};
-
 const processStateHandler = (instance, processState) => {
+  const elements = {
+    submitButton: document.querySelector('[aria-label="add"]'),
+    feedbackContainer: document.querySelector('.feedback'),
+    form: document.querySelector('.rss-form'),
+    urlInput: document.querySelector('#url-input'),
+  };
   switch (processState) {
     case 'filling':
       elements.urlInput.focus();
