@@ -15,13 +15,16 @@ const processStateHandler = (instance, processState) => {
     case 'filling':
       elements.urlInput.focus();
       elements.submitButton.disabled = false;
+      elements.urlInput.readOnly = false;
       break;
     case 'sending':
       elements.submitButton.disabled = true;
       elements.feedbackContainer.textContent = '';
+      elements.urlInput.readOnly = true;
       break;
     case 'success':
       elements.submitButton.disabled = false;
+      elements.urlInput.readOnly = false;
       elements.form.reset();
       elements.feedbackContainer.classList.replace('text-danger', 'text-success');
       elements.feedbackContainer.textContent = instance.t('form.success');
@@ -29,6 +32,7 @@ const processStateHandler = (instance, processState) => {
       break;
     case 'failed':
       elements.submitButton.disabled = false;
+      elements.urlInput.readOnly = false;
       break;
     default:
       throw new Error(`Unknown state: ${processState}`);
