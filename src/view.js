@@ -36,6 +36,14 @@ const processStateHandler = (instance, processState) => {
   }
 };
 
+const visitedLinksIdsHandler = (visitedLinksIds) => {
+  visitedLinksIds.forEach((link) => {
+    const visitedLink = document.querySelector(`[data-id="${link}"]`);
+    visitedLink.classList.remove('fw-bold');
+    visitedLink.classList.add('fw-normal', 'link-secondary');
+  });
+};
+
 export default (instance, state) => {
   const watchedState = onChange(state, (path, value, previousValue) => {
     console.log('PATH IS  !!!!', path);
@@ -52,10 +60,13 @@ export default (instance, state) => {
         renderErrors(instance, value);
         break;
       case 'form.posts':
-        renderPosts(instance, value);
+        renderPosts(watchedState, instance, value);
         break;
       case 'form.feeds':
         renderFeeds(value);
+        break;
+      case 'ui.form.visitedLinksIds':
+        visitedLinksIdsHandler(value);
         break;
       default:
         break;

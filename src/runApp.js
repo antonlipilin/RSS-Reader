@@ -67,13 +67,14 @@ export default () => {
         const { title, posts } = generateId(watchedState, rssParser(response.data.contents));
 
         watchedState.form.loadingErrors = [];
-        watchedState.form.feeds.push(title);
         watchedState.form.posts = posts.concat(watchedState.form.posts);
+        watchedState.form.feeds.push(title);
         watchedState.form.urls.add(inputValue);
         watchedState.form.processState = 'success';
       })
       .then(() => updatePosts(watchedState, inputValue))
       .catch((error) => {
+        console.log(error);
         if (error.message === 'Invalid RSS') {
           watchedState.form.loadingErrors = ['form.invalidRss'];
         } else {
