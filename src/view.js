@@ -52,7 +52,7 @@ export default (instance, state) => {
         renderErrors(instance, value);
         break;
       case 'form.posts':
-        renderPosts(value);
+        renderPosts(instance, value);
         break;
       case 'form.feeds':
         renderFeeds(value);
