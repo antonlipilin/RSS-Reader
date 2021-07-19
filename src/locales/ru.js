@@ -8,5 +8,7 @@ export default {
       success: 'RSS успешно загружен',
     },
     showPost: 'Показать',
+    fullArticle: 'Читать полностью',
+    closeButton: 'Закрыть',
   },
 };

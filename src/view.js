@@ -44,17 +44,20 @@ const visitedLinksIdsHandler = (visitedLinksIds) => {
   });
 };
 
-const shownElementIdHandler = (watchedState, postId) => {
+const shownElementIdHandler = (watchedState, instance, postId) => {
   const modalEl = document.querySelector('#modal');
   const modalHeaderEl = modalEl.querySelector('.modal-title');
   const modalBodyEl = modalEl.querySelector('.modal-body');
   const closeButtons = modalEl.querySelectorAll('[data-bs-dismiss="modal"]');
-  const readArticleButton = modalEl.querySelector('.full-article');
+  const footerCloseButton = modalEl.querySelector('.btn-secondary');
+  const readFullArticleButton = modalEl.querySelector('.full-article');
   const currentPost = watchedState.form.posts.find((post) => post.postId === postId);
 
+  footerCloseButton.value = instance.t('closeButton');
+  readFullArticleButton.value = instance.t('fullArticle');
   modalHeaderEl.textContent = currentPost.postTitle;
   modalBodyEl.textContent = currentPost.postDescription;
-  readArticleButton.href = currentPost.postLink;
+  readFullArticleButton.href = currentPost.postLink;
   modalEl.style.display = 'block';
   modalEl.classList.add('show');
 
@@ -90,7 +93,7 @@ export default (instance, state) => {
         break;
       case 'ui.form.shownElementId':
         if (!value) return;
-        shownElementIdHandler(watchedState, value);
+        shownElementIdHandler(watchedState, instance, value);
         break;
       default:
         break;
