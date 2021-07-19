@@ -53,8 +53,8 @@ const shownElementIdHandler = (watchedState, instance, postId) => {
   const readFullArticleButton = modalEl.querySelector('.full-article');
   const currentPost = watchedState.form.posts.find((post) => post.postId === postId);
 
-  footerCloseButton.value = instance.t('closeButton');
-  readFullArticleButton.value = instance.t('fullArticle');
+  footerCloseButton.textContent = instance.t('closeButton');
+  readFullArticleButton.textContent = instance.t('fullArticle');
   modalHeaderEl.textContent = currentPost.postTitle;
   modalBodyEl.textContent = currentPost.postDescription;
   readFullArticleButton.href = currentPost.postLink;
