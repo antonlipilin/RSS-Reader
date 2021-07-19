@@ -15,7 +15,7 @@ export default {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'RSS Reader',
-      template: 'template.html',
+      template: 'index.html',
     }),
   ],
   module: {
