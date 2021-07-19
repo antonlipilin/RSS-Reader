@@ -7,7 +7,7 @@ export default {
       networkProblem: 'Ошибка сети',
       success: 'RSS успешно загружен',
     },
-    showPost: 'Показать',
+    showPost: 'Просмотр',
     fullArticle: 'Читать полностью',
     closeButton: 'Закрыть',
   },
