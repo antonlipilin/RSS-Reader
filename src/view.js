@@ -44,11 +44,31 @@ const visitedLinksIdsHandler = (visitedLinksIds) => {
   });
 };
 
+const shownElementIdHandler = (watchedState, postId) => {
+  const modalEl = document.querySelector('#modal');
+  const modalHeaderEl = modalEl.querySelector('.modal-title');
+  const modalBodyEl = modalEl.querySelector('.modal-body');
+  const closeButtons = modalEl.querySelectorAll('[data-bs-dismiss="modal"]');
+  const readArticleButton = modalEl.querySelector('.full-article');
+  const currentPost = watchedState.form.posts.find((post) => post.postId === postId);
+
+  modalHeaderEl.textContent = currentPost.postTitle;
+  modalBodyEl.textContent = currentPost.postDescription;
+  readArticleButton.href = currentPost.postLink;
+  modalEl.style.display = 'block';
+  modalEl.classList.add('show');
+
+  closeButtons.forEach((closeButton) => {
+    closeButton.addEventListener('click', () => {
+      modalEl.style.display = 'none';
+      modalEl.classList.remove('show');
+      watchedState.ui.form.shownElementId = null;
+    });
+  });
+};
+
 export default (instance, state) => {
-  const watchedState = onChange(state, (path, value, previousValue) => {
-    console.log('PATH IS  !!!!', path);
-    console.log('VALUE IS  !!!', value);
-    console.log('PREVIOUS VALUE IS', previousValue);
+  const watchedState = onChange(state, (path, value) => {
     switch (path) {
       case 'form.validationErrors':
         renderValidationErrors(instance, value);
@@ -67,6 +87,10 @@ export default (instance, state) => {
         break;
       case 'ui.form.visitedLinksIds':
         visitedLinksIdsHandler(value);
+        break;
+      case 'ui.form.shownElementId':
+        if (!value) return;
+        shownElementIdHandler(watchedState, value);
         break;
       default:
         break;
